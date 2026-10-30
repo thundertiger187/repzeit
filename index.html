@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>EDT Timer – neue Adresse</title><meta name="robots" content="noindex">
+<link rel="canonical" href="https://thundertiger187.github.io/edt-timer/">
+<script>
+(function () {
+  // RepZeit heißt jetzt EDT Timer: /repzeit/… → /edt-timer/ (Daten bleiben, gleiche Origin)
+  var target = '/edt-timer/' + location.search + location.hash, done = false;
+  function go() { if (!done) { done = true; location.replace(target); } }
+  try {
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.getRegistrations().then(function (rs) {
+        return Promise.all(rs.filter(function (r) { return /\/repzeit\/$/.test(r.scope); }).map(function (r) { return r.unregister(); }));
+      }).then(go, go);
+      setTimeout(go, 1500);
+    } else go();
+  } catch (e) { go(); }
+})();
+</script>
+<noscript><meta http-equiv="refresh" content="0;url=/edt-timer/"></noscript>
+<style>body{background:#0b0d10;color:#f2f5f7;font:16px system-ui,sans-serif;display:grid;place-items:center;min-height:100vh;margin:0;text-align:center}a{color:#c6ff3d;font-weight:700}</style>
+</head><body><p>RepZeit heißt jetzt EDT Timer.<br><a href="/edt-timer/">Weiter zu EDT Timer</a></p></body></html>
